@@ -10,8 +10,11 @@ const movies = [
     description: "Apostle pauls record about the third heavens",
     genre: 0,
     director: 0,
-    imageUrl: '',
-    featured: false
+    actors: [],
+    imageUrl: "",
+    featured: false,
+    torrent:'',
+    videoUrl: ''
   },
   {
     movieId: 0,
@@ -19,18 +22,24 @@ const movies = [
     description: "Seek ye first the kingdom of God and it's righteousness",
     genre: 0,
     director: 0,
-    imageUrl: '',
-    featured: false
+    actors: [],
+    imageUrl: "",
+    featured: false,
+    torrent:'',
+    videoUrl: ''
   },
   {
     movieId: 0,
     title: "Coming back from America",
     description:
       "A slave taken from Africa, (Congo, Zaire) to America returns to Africa",
-      genre: 0,
-      director: 0,
-      imageUrl: '',
-      featured: false
+    genre: 0,
+    director: 0,
+    actors: [],
+    imageUrl: "",
+    featured: false,
+    torrent:'',
+    videoUrl: ''
   },
 ];
 
@@ -38,14 +47,11 @@ const getMovies = (req, res) => {
   res.status(200).json(movies);
 };
 
-const createMovie = (req, res) => {
-};
+const createMovie = (req, res) => {};
 
-const updateMovie = (req, res) => {
-};
+const updateMovie = (req, res) => {};
 
-const deleteMovie = (req, res) => {
-};
+const deleteMovie = (req, res) => {};
 
 module.exports = {
   getMovies,

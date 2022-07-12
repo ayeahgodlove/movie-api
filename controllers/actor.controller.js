@@ -5,6 +5,7 @@ const actors = [
     bio: "Seek ye first the kingdom of God and it's righteousness",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
   {
     actorId: 0,
@@ -12,6 +13,7 @@ const actors = [
     bio: "Seek ye first the kingdom of God and it's righteousness",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
   {
     actorId: 0,
@@ -19,6 +21,7 @@ const actors = [
     bio: "Seek ye first the kingdom of God and it's righteousness",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
 ];
 

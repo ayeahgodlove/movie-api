@@ -5,6 +5,7 @@ const directors = [
     bio: "Apostle pauls record about the third heavens",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
   {
     directorId: 0,
@@ -12,6 +13,7 @@ const directors = [
     bio: "Seek ye first the kingdom of God and it's righteousness",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
   {
     directorId: 0,
@@ -19,6 +21,7 @@ const directors = [
     bio: "A slave taken from Africa, (Congo, Zaire) to America returns to Africa",
     birthdate: new Date(),
     death: new Date(),
+    imageUrl: ''
   },
 ];
 
