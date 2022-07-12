@@ -1,2 +1,5 @@
 ::ffff:127.0.0.1 - - [12/Jul/2022:15:49:19 +0000] "GET /documentation HTTP/1.1" 200 328 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [12/Jul/2022:15:49:26 +0000] "GET / HTTP/1.1" 200 18 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [12/Jul/2022:16:15:43 +0000] "GET /api/movies HTTP/1.1" 200 333 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [12/Jul/2022:16:19:54 +0000] "POST /api/movies HTTP/1.1" - - "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [12/Jul/2022:16:19:58 +0000] "GET /api/movies HTTP/1.1" 200 333 "-" "Thunder Client (https://www.thunderclient.com)"

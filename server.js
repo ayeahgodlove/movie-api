@@ -15,19 +15,17 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 app.use(morgan("combined", { stream: accessLogStream }));
+app.use(express.static('public'));
 
 // call database connection
 connectDB();
 
-// app routes
+// app documentation routes
 app.get("/documentation", (req, res) => {
   res.sendFile("public/index.html", { root: __dirname });
 });
 
-app.get("/", (req, res) => {
-  res.send("Welcome to my app!");
-});
-
+app.use('/api/movies', require('./routes/movie.routes'));
 // listen on port
 app.listen(PORT, () => {
   console.log(`Your app is listening on port ${PORT}.`);
