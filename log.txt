@@ -1,0 +1,2 @@
+::ffff:127.0.0.1 - - [12/Jul/2022:15:49:19 +0000] "GET /documentation HTTP/1.1" 200 328 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [12/Jul/2022:15:49:26 +0000] "GET / HTTP/1.1" 200 18 "-" "Thunder Client (https://www.thunderclient.com)"
