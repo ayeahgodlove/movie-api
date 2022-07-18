@@ -4,7 +4,7 @@ const fs = require("fs"); // import built in node modules fs
 const path = require("path"); // and path
 const colors = require("colors");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 //Database connections
 const {connectMongoDB} = require("./config/db.config");

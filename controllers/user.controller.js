@@ -1,6 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/mysql/user.model");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { mySQLSequelize } = require("../config/db-mysql.config");
+const generateToken = require("../security/generate-token");
 const operation = User(mySQLSequelize);
 
 const getUsers = asyncHandler(async (req, res) => {
@@ -14,7 +17,9 @@ const searchUsers = asyncHandler(async (req, res) => {
   const allUsers = await operation.findAll();
 
   const filteredUsers = allUsers.filter((user) =>
-    (user.firstname + user.lastname + user.username).toLowerCase().includes(searchParam.toString().toLowerCase())
+    (user.firstname + user.lastname + user.username)
+      .toLowerCase()
+      .includes(searchParam.toString().toLowerCase())
   );
 
   if (filteredUsers && filteredUsers.length < 1) {
@@ -29,16 +34,47 @@ const createUser = asyncHandler(async (req, res) => {
   const { firstname, lastname, username, password, email, birthyear } =
     req.body;
 
-  if (!firstname) {
-    res.status(400).send();
-    throw new Error("Please add actor name");
+  if (
+    !firstname ||
+    !lastname ||
+    !username ||
+    !password ||
+    !email ||
+    !birthyear
+  ) {
+    res.status(400);
+    throw new Error(
+      JSON.stringify({
+        username: "Please add a firstname field",
+        username: "Please add a lastname field",
+        username: "Please add a username field",
+        password: "Please add a password field",
+        email: "Please add a email field",
+        birthday: "Please add a birthday field",
+      })
+    );
   }
+
+  // check if username, or email exist already
+  const userExists = await operation.findOne({ where: { email, username } });
+  if (userExists) {
+    res.status(400);
+    throw new Error(
+      JSON.stringify({
+        message: "Email already exists in the system",
+      })
+    );
+  }
+
+  // hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
   const user = {
     firstname,
     lastname,
     username,
-    password,
+    password: hashedPassword,
     email,
     birthyear,
     created_at: new Date(),
@@ -46,7 +82,19 @@ const createUser = asyncHandler(async (req, res) => {
 
   await User(mySQLSequelize)
     .create(user)
-    .then((data) => res.send(data))
+    .then((data) => {
+      res.status(201).send({
+        id: data.id,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        birthyear: data.birthday,
+        created_at: data.birthday,
+        token: generateToken(data.id),
+      });
+    })
     .catch((err) =>
       res.status(500).send({
         message:
@@ -109,10 +157,32 @@ const deleteUser = asyncHandler(async (req, res) => {
     });
 });
 
+const loginUser = asyncHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  // check for user email
+  const user = await operation.findOne({ where: { username } });
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      id: user.id,
+      username: user.username,
+      password: user.password,
+      email: user.email,
+      token: generateToken(user.id)
+    });
+  } else {
+    res.status(400);
+    throw new Error(JSON.stringify({
+      message: "Invalid User Credentials"
+    }))
+  }
+});
+
 module.exports = {
   getUsers,
   searchUsers,
   createUser,
   updateUser,
   deleteUser,
+  loginUser
 };

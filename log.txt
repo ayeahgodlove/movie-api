@@ -116,3 +116,5 @@
 ::ffff:127.0.0.1 - - [18/Jul/2022:19:41:10 +0000] "GET /api/users/dv HTTP/1.1" 400 347 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [18/Jul/2022:19:41:15 +0000] "GET /api/users/godlo HTTP/1.1" 200 192 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [18/Jul/2022:19:41:28 +0000] "GET /api/movies/d HTTP/1.1" 200 265 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [18/Jul/2022:21:40:59 +0000] "POST /api/users HTTP/1.1" 201 812 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [18/Jul/2022:21:43:56 +0000] "POST /api/users HTTP/1.1" 201 323 "-" "Thunder Client (https://www.thunderclient.com)"
