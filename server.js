@@ -46,10 +46,11 @@ app.get("/documentation", (req, res) => {
 });
 
 app.use('/api/movies', require('./routes/movie.routes'));
-// app.use('/api/users', require('./routes/user.routes'));
-// app.use('/api/directors', require('./routes/director.routes'));
-// app.use('/api/actors', require('./routes/actor.routes'));
-// app.use('/api/genres', require('./routes/genre.routes'));
+app.use('/api/actors', require('./routes/actor.routes'));
+app.use('/api/directors', require('./routes/director.routes'));
+app.use('/api/genres', require('./routes/genre.routes'));
+app.use('/api/users', require('./routes/user.routes'));
+
 // app.use('/api/tvshows', require('./routes/tvshow.routes'));
 // listen on port
 app.listen(PORT, () => {

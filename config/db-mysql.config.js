@@ -9,6 +9,9 @@ const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   dialect: dbConfig.dialect,
+  define: {
+    timestamps: false
+  },
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,

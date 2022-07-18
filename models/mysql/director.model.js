@@ -11,15 +11,23 @@ const Director = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    birthdate: {
+    birthyear: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    create_at: {
+    deathyear: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    created_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },

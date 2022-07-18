@@ -1,34 +1,42 @@
-const genres = [
-  {
-    genreId: 0,
-    name: "Thriller",
-    description: "Apostle pauls record about the third heavens",
-  },
-  {
-    genreId: 0,
-    name: "Horror",
-    description: "Seek ye first the kingdom of God and it's righteousness",
-  },
-  {
-    genreId: 0,
-    name: "Comedy",
-    description:
-      "A slave taken from Africa, (Congo, Zaire) to America returns to Africa",
-  },
-];
+const asyncHandler = require("express-async-handler");
+const Genre = require("../models/mysql/genre.model");
+const { mySQLSequelize } = require("../config/db-mysql.config");
+const operation = Genre(mySQLSequelize);
 
-const getGenres = (req, res) => {
-  res.status(200).json(movies);
-};
 
-const createGenre = (req, res) => {
-};
+const getGenres = asyncHandler(async (req, res) => {
+  const genres = await operation.findAll();
+  res.status(200).json(genres);
+});
 
-const updateGenre = (req, res) => {
-};
+const createGenre = asyncHandler(async (req, res) => {
+  const { title, description} = req.body;
 
-const deleteGenre = (req, res) => {
-};
+  if (!title) {
+    res.status(400).send();
+    throw new Error("Please add genre");
+  }
+
+  const genre = {
+    title,
+    description,
+    created_at: new Date(),
+  };
+
+  await Genre(mySQLSequelize)
+    .create(genre)
+    .then((data) => res.send(data))
+    .catch((err) =>
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Genre.",
+      })
+    );
+});
+
+const updateGenre = asyncHandler(async (req, res) => {});
+
+const deleteGenre = asyncHandler(async (req, res) => {});
 
 module.exports = {
   getGenres,

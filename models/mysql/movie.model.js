@@ -18,10 +18,7 @@ const Movie = (sequelize) => {
     img_path: {
       type: DataTypes.STRING,
     },
-    create_at: {
-      type: DataTypes.DATE,
-    },
-    published_at: {
+    published: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
@@ -33,8 +30,6 @@ const Movie = (sequelize) => {
         //reference modek
         model: Genre,
         key: "id",
-        // With PostgreSQL, it is optionally possible to declare when to check the foreign key constraint, passing the Deferrable type.
-        deferrable: Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     directorId: {
@@ -43,8 +38,6 @@ const Movie = (sequelize) => {
         //reference modek
         model: Director,
         key: "id",
-        // With PostgreSQL, it is optionally possible to declare when to check the foreign key constraint, passing the Deferrable type.
-        deferrable: Deferrable.INITIALLY_IMMEDIATE,
       },
     },
     actorId: {
@@ -53,8 +46,6 @@ const Movie = (sequelize) => {
         //reference modek
         model: Actor,
         key: "id",
-        // With PostgreSQL, it is optionally possible to declare when to check the foreign key constraint, passing the Deferrable type.
-        deferrable: Deferrable.INITIALLY_IMMEDIATE,
       },
     },
   });

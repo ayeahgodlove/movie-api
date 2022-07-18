@@ -28,11 +28,11 @@ const User = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    birthdate: {
+    birthyear: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    create_at: {
+    created_at: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
