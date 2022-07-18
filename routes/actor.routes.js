@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { getActors, createActor, updateActor, deleteActor } = require('../controllers/actor.controller')
+const { getActors, createActor, updateActor, deleteActor, searchActors } = require('../controllers/actor.controller')
 
 router.get('/', getActors);
+router.get('/:search', searchActors);
 router.post('/', createActor);
 router.put('/:id', updateActor);
-router.put('/:id', deleteActor);
+router.delete('/:id', deleteActor);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 

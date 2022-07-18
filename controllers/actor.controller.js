@@ -34,13 +34,24 @@ const getActors = asyncHandler(async (req, res) => {
   res.status(200).json(actors);
 });
 
-const getActor = asyncHandler(async (req, res) => {
-  res.status(200).json(movies);
+const searchActors = asyncHandler(async (req, res) => {
+  const searchParam = req.params.search;
+  const allActors = await operation.findAll();
+
+  const filteredActors = allActors.filter((actor) =>
+    actor.name.toLowerCase().includes(searchParam.toString().toLowerCase())
+  );
+
+  if (filteredActors && filteredActors.length < 1) {
+    res.status(400);
+    throw new Error("Search not found! try again.");
+  }
+
+  res.send(filteredActors);
 });
 
 const createActor = asyncHandler(async (req, res) => {
-  const { name, bio, avatar, birthyear, deathyear } =
-    req.body;
+  const { name, bio, avatar, birthyear, deathyear } = req.body;
 
   if (!name) {
     res.status(400).send();
@@ -53,10 +64,11 @@ const createActor = asyncHandler(async (req, res) => {
     avatar,
     birthyear: new Date(),
     deathyear: new Date(),
-    created_at: new Date()
+    created_at: new Date(),
   };
 
-  await operation.create(actor)
+  await operation
+    .create(actor)
     .then((data) => res.send(data))
     .catch((err) =>
       res.status(500).send({
@@ -66,12 +78,63 @@ const createActor = asyncHandler(async (req, res) => {
     );
 });
 
-const updateActor = asyncHandler(async (req, res) => {});
+const updateActor = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const actor = await operation.findByPk(id);
 
-const deleteActor = asyncHandler(async (req, res) => {});
+  if (!actor) {
+    res.status(400);
+    throw new Error("actor not found!");
+  }
+
+  await operation
+    .update(req.body, {
+      where: { id: id },
+    })
+    .then(async (num) => {
+      const updatedActor = await operation.findByPk(id);
+      res.send({
+        message: "Tutorial was updated successfully.",
+        data: updatedActor,
+      });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error updating Tutorial with id=" + id,
+        data: error,
+      });
+    });
+});
+
+const deleteActor = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const actor = await operation.findByPk(id);
+
+  if (!actor) {
+    res.status(400);
+    throw new Error("actor not found!");
+  }
+
+  await operation
+    .destroy({
+      where: { id: id },
+    })
+    .then((num) => {
+      res.status(200).send({
+        message: `Actor: ${actor.name} was deleted successfully!`,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: `Could not delete Actor: ${actor.name}`,
+      });
+    });
+});
 
 module.exports = {
   getActors,
+  searchActors,
   createActor,
   updateActor,
   deleteActor,

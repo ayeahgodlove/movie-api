@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getDirectors, createDirector, updateDirector, deleteDirector } = require('../controllers/director.controller')
+const { getDirectors, createDirector, updateDirector, deleteDirector, searchDirectors } = require('../controllers/director.controller')
 
 router.get('/', getDirectors);
+router.get('/:search', searchDirectors);
 router.post('/', createDirector);
 router.put('/:id', updateDirector);
 router.put('/:id', deleteDirector);
