@@ -168,14 +168,30 @@ const loginUser = asyncHandler(async (req, res) => {
       username: user.username,
       password: user.password,
       email: user.email,
-      token: generateToken(user.id)
+      token: generateToken(user.id),
     });
   } else {
     res.status(400);
-    throw new Error(JSON.stringify({
-      message: "Invalid User Credentials"
-    }))
+    throw new Error(
+      JSON.stringify({
+        message: "Invalid User Credentials",
+      })
+    );
   }
+});
+
+const getProfile = asyncHandler(async (req, res) => {
+  const { id, firstname, lastname, username, email, birthyear } =
+    await operation.findByPk(req.user.id);
+
+  res.status(200).json({
+    id,
+    firstname,
+    lastname,
+    username,
+    email,
+    birthyear,
+  });
 });
 
 module.exports = {
@@ -184,5 +200,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  loginUser
+  loginUser,
+  getProfile,
 };
