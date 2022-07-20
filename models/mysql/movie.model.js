@@ -15,12 +15,17 @@ const Movie = (sequelize) => {
     description: {
       type: DataTypes.TEXT,
     },
-    img_path: {
+    videoPath: {
+      type: DataTypes.STRING
+    },
+    imgPath: {
+      type: DataTypes.STRING,
+    },
+    banner: {
       type: DataTypes.STRING,
     },
     published: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
     },
 
     // foreign keys

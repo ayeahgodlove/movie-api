@@ -34,7 +34,7 @@ const searchMovies = asyncHandler(async (req, res) => {
 
 
 const createMovie = asyncHandler(async (req, res) => {
-  const { title, description, img_path, genreId, directorId, actorId } =
+  const { title, description, imgPath, genreId, directorId, actorId, videoPath, banner } =
     req.body;
 
   if (!title) {
@@ -45,12 +45,14 @@ const createMovie = asyncHandler(async (req, res) => {
   const movie = {
     title,
     description,
-    img_path,
-    published: new Date(),
+    imgPath,
+    videoPath,
+    banner,
+    published,
     created_at: new Date(),
-    genreId: 1,
-    directorId: 1,
-    actorId: 1,
+    genreId,
+    directorId,
+    actorId,
   };
 
   await Movie(mySQLSequelize)

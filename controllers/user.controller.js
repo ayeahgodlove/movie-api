@@ -25,7 +25,9 @@ const searchUsers = asyncHandler(async (req, res) => {
 
   if (filteredUsers && filteredUsers.length < 1) {
     res.status(400);
-    throw new Error("Search not found! try again.");
+    throw new Error(JSON.stringify({
+      message: "Search not found! try again."
+    }));
   }
 
   res.send(filteredUsers);

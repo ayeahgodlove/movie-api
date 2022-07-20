@@ -173,3 +173,5 @@
 ::ffff:127.0.0.1 - - [20/Jul/2022:09:52:48 +0000] "GET /api/movies HTTP/1.1" 200 265 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [20/Jul/2022:09:52:59 +0000] "GET /api/directors HTTP/1.1" 200 173 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [20/Jul/2022:09:53:09 +0000] "GET /api/actors HTTP/1.1" 200 176 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [20/Jul/2022:10:07:32 +0000] "POST /api/movies HTTP/1.1" 401 1441 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [20/Jul/2022:10:07:43 +0000] "POST /api/movies HTTP/1.1" 200 356 "-" "Thunder Client (https://www.thunderclient.com)"
