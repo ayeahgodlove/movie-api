@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { getDirectors, createDirector, updateDirector, deleteDirector, searchDirectors } = require('../controllers/director.controller')
+const { protect } = require("../middleware/authMiddle");
 
-router.get('/', getDirectors);
-router.get('/:search', searchDirectors);
-router.post('/', createDirector);
-router.put('/:id', updateDirector);
-router.put('/:id', deleteDirector);
+router.get('/', protect,getDirectors);
+router.get('/:search', protect,searchDirectors);
+router.post('/', protect,createDirector);
+router.put('/:id', protect,updateDirector);
+router.put('/:id', protect,deleteDirector);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { mySQLSequelize } = require("../config/db-mysql.config");
 const generateToken = require("../security/generate-token");
 const operation = User(mySQLSequelize);
+require("dotenv").config();
 
 const getUsers = asyncHandler(async (req, res) => {
   const users = await operation.findAll();
@@ -160,6 +161,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
+  // console.log(process.env.JWT_SECRET)
   // check for user email
   const user = await operation.findOne({ where: { username } });
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -181,6 +183,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getProfile = asyncHandler(async (req, res) => {
+  console.log("user: ", req)
   const { id, firstname, lastname, username, email, birthyear } =
     await operation.findByPk(req.user.id);
 

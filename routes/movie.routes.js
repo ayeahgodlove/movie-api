@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { getMovies, createMovie, updateMovie, deleteMovie, searchMovies } = require('../controllers/movie.controller')
+const { protect } = require("../middleware/authMiddle");
 
-router.get('/', getMovies);
-router.get('/:search', searchMovies);
-router.post('/', createMovie);
-router.put('/:id', updateMovie);
-router.put('/:id', deleteMovie);
+router.get('/', protect,getMovies);
+router.get('/:search', protect,searchMovies);
+router.post('/', protect,createMovie);
+router.put('/:id', protect,updateMovie);
+router.put('/:id', protect,deleteMovie);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 

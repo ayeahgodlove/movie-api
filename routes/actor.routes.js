@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { getActors, createActor, updateActor, deleteActor, searchActors } = require('../controllers/actor.controller')
+const { protect } = require("../middleware/authMiddle");
 
-router.get('/', getActors);
-router.get('/:search', searchActors);
-router.post('/', createActor);
-router.put('/:id', updateActor);
-router.delete('/:id', deleteActor);
+router.get('/', protect,getActors);
+router.get('/:search', protect,searchActors);
+router.post('/', protect,createActor);
+router.put('/:id', protect,updateActor);
+router.delete('/:id', protect,deleteActor);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 

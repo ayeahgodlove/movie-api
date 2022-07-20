@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { getGenres, createGenre, updateGenre, deleteGenre, searchGenres } = require('../controllers/genre.controller')
+const { protect } = require("../middleware/authMiddle");
 
-router.get('/', getGenres);
-router.get('/:search', searchGenres);
-router.post('/', createGenre);
-router.put('/:id', updateGenre);
-router.put('/:id', deleteGenre);
+router.get('/', protect,getGenres);
+router.get('/:search', protect,searchGenres);
+router.post('/', protect,createGenre);
+router.put('/:id', protect,updateGenre);
+router.put('/:id', protect,deleteGenre);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 

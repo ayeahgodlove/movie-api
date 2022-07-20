@@ -9,14 +9,15 @@ const {
   loginUser,
   getProfile,
 } = require("../controllers/user.controller");
+const { protect } = require("../middleware/authMiddle");
 
-router.get("/", getUsers);
-router.get("/:search", searchUsers);
+router.get("/", protect,getUsers);
+router.get("/search/:search", protect,searchUsers);
 router.post("/", createUser);
-router.put("/:id", updateUser);
-router.put("/:id", deleteUser);
+router.put("/:id", protect,updateUser);
+router.put("/:id", protect,deleteUser);
 router.post("/login", loginUser);
-router.post("/me", getProfile);
+router.get("/profile", protect,getProfile);
 
 // router.route('/').get(protect, getGoals).post(protect, createGoal);
 
