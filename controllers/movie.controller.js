@@ -34,7 +34,7 @@ const searchMovies = asyncHandler(async (req, res) => {
 
 
 const createMovie = asyncHandler(async (req, res) => {
-  const { title, description, imgPath, genreId, directorId, actorId, videoPath, banner } =
+  const { title, description, imgPath, genreId, directorId, actorId, videoPath, banner, published } =
     req.body;
 
   if (!title) {

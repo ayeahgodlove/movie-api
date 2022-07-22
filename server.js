@@ -36,7 +36,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static('public'));
 
 // call database connection
-connectMongoDB();
+// connectMongoDB();
 connectMysQLDB();
 // connectPostgresDB();
 
