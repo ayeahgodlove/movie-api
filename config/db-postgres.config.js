@@ -4,7 +4,7 @@
  * Sequelize with Postgres
  */
 
-const dbConfig = require("../paramters/mysql-paramters.config");
+const dbConfig = require("../paramters/postgres-paramters.config");
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -15,6 +15,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle,
   },
+  logging: false
 });
 
 const connectPostgresDB = async () => {
@@ -26,4 +27,5 @@ const connectPostgresDB = async () => {
   }
 };
 
-module.exports = { connectPostgresDB, sequelizePostgres: sequelize };
+module.exports = { connectPostgresDB, mySQLSequelize: sequelize };
+

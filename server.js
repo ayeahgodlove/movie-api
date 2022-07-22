@@ -9,7 +9,7 @@ require("dotenv").config();
 //Database connections
 const {connectMongoDB} = require("./config/db.config");
 const {connectMysQLDB} = require("./config/db-mysql.config");
-// const connectPostgresDB = require("./config/db-postgres.config");
+const {connectPostgresDB} = require("./config/db-postgres.config");
 
 const PORT = process.env.PORT;
 
@@ -36,9 +36,9 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static('public'));
 
 // call database connection
-// connectMongoDB();
+connectMongoDB();
 connectMysQLDB();
-// connectPostgresDB();
+connectPostgresDB();
 
 // app documentation routes
 app.get("/documentation", (req, res) => {
